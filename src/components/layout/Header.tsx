@@ -1,5 +1,5 @@
 import React from "react";
-import { Bell, Settings, User } from "lucide-react";
+import { Bell, Settings, User, HelpCircle } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { navigationConfig } from "./nav";
 import { useState } from "react";
@@ -49,13 +49,7 @@ const Header = ({
               <div key={item.title} className="relative group">
                 {item.subItems ? (
                   <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer">
-                    {item.icon}
                     <span>{item.title}</span>
-                    {item.label && (
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-xs">
-                        {item.label}
-                      </span>
-                    )}
                     <div className="hidden group-hover:block absolute top-full left-0 mt-2 bg-white rounded-md py-2 w-48 shadow-lg z-50">
                       {item.subItems.map((subItem) => (
                         <button
@@ -86,13 +80,7 @@ const Header = ({
                       )
                     }
                   >
-                    {item.icon}
                     <span>{item.title}</span>
-                    {item.label && (
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-xs">
-                        {item.label}
-                      </span>
-                    )}
                   </NavLink>
                 )}
               </div>
@@ -128,10 +116,6 @@ const Header = ({
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="ghost" size="icon">
-              <Settings className="h-5 w-5" />
-            </Button>
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -160,7 +144,14 @@ const Header = ({
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  <span>Help & Support</span>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Log out</DropdownMenuItem>
               </DropdownMenuContent>

@@ -1,18 +1,10 @@
-import {
-  Users,
-  Calculator,
-  FileText,
-  BarChart3,
-  Home,
-  Settings,
-  HelpCircle,
-} from "lucide-react";
-
 export interface NavItem {
   title: string;
   href: string;
-  icon: React.ReactNode;
-  label?: string;
+  subItems?: Array<{
+    title: string;
+    href: string;
+  }>;
 }
 
 export interface NavSection {
@@ -26,7 +18,6 @@ export const navigationConfig: NavSection[] = [
       {
         title: "Dashboard",
         href: "/",
-        icon: <Home className="w-5 h-5" />,
       },
     ],
   },
@@ -36,8 +27,6 @@ export const navigationConfig: NavSection[] = [
       {
         title: "Employees",
         href: "/employees",
-        icon: <Users className="w-5 h-5" />,
-        label: "12",
         subItems: [
           {
             title: "Add New Employee",
@@ -52,32 +41,14 @@ export const navigationConfig: NavSection[] = [
       {
         title: "Payroll",
         href: "/payroll",
-        icon: <Calculator className="w-5 h-5" />,
       },
       {
         title: "Taxes",
         href: "/taxes",
-        icon: <FileText className="w-5 h-5" />,
       },
       {
         title: "Reports",
         href: "/reports",
-        icon: <BarChart3 className="w-5 h-5" />,
-      },
-    ],
-  },
-  {
-    title: "Settings & Support",
-    items: [
-      {
-        title: "Settings",
-        href: "/settings",
-        icon: <Settings className="w-5 h-5" />,
-      },
-      {
-        title: "Help & Support",
-        href: "/support",
-        icon: <HelpCircle className="w-5 h-5" />,
       },
     ],
   },
