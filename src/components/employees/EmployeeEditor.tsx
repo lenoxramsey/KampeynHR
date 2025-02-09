@@ -30,7 +30,7 @@ export default function EmployeeEditor({
         <Button
           variant="ghost"
           className="mb-6"
-          onClick={() => navigate("/employees/directory")}
+          onClick={() => navigate("/employees")}
         >
           <ChevronLeft className="mr-2 h-4 w-4" />
           Back to Employee Overview

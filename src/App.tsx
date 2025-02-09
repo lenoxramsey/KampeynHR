@@ -20,11 +20,8 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/employees" element={<EmployeeDirectory />} />
             <Route path="/employees/new" element={<EmployeeEditor />} />
-            <Route
-              path="/employees/directory"
-              element={<EmployeeDirectory />}
-            />
           </Routes>
           {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
         </>

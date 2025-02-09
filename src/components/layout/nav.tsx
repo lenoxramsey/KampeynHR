@@ -35,7 +35,7 @@ export const navigationConfig: NavSection[] = [
           },
           {
             title: "View All Employees",
-            href: "/employees/directory",
+            href: "/employees",
             icon: "Users",
           },
         ],

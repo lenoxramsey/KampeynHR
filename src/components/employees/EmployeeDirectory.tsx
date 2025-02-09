@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { UserPlus, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Header from "../layout/Header";
 
 interface Employee {
   id: string;
@@ -23,8 +24,9 @@ export default function EmployeeDirectory({
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="max-w-7xl mx-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-foreground">Employees</h1>
           <Button onClick={() => navigate("/employees/new")}>
