@@ -1,5 +1,6 @@
 import React from "react";
-import { Bell, Settings, User, HelpCircle } from "lucide-react";
+import { Settings, User, HelpCircle } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { NavLink } from "react-router-dom";
 import { navigationConfig } from "./nav";
 import { useState } from "react";
@@ -87,34 +88,7 @@ const Header = ({
             )),
           )}
           <div className="flex items-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
-                  <Bell className="h-5 w-5" />
-                  {notifications.length > 0 && (
-                    <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-80">
-                <div className="p-4">
-                  <h3 className="font-medium mb-2">Notifications</h3>
-                  <div className="space-y-2">
-                    {notifications.map((notification) => (
-                      <div
-                        key={notification.id}
-                        className="p-2 bg-muted rounded-lg"
-                      >
-                        <div className="font-medium">{notification.title}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {notification.message}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <ThemeToggle />
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
