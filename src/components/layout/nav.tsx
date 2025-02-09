@@ -36,6 +36,14 @@ export const navigationConfig: NavSection[] = [
             title: "View All Employees",
             href: "/employees",
           },
+          {
+            title: "Employee Directory",
+            href: "/employees/directory",
+          },
+          {
+            title: "Time Off Requests",
+            href: "/employees/time-off",
+          },
         ],
       },
       {
