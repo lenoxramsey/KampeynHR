@@ -3,6 +3,15 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface EmployeeEditorProps {
   onSave?: (data: any) => void;
@@ -13,78 +22,68 @@ export default function EmployeeEditor({
   onSave = () => {},
   initialData = {},
 }: EmployeeEditorProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto py-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-foreground">
-            Add New Employee
-          </h1>
-          <div className="space-x-2">
-            <Button variant="outline">Cancel</Button>
-            <Button>Save Employee</Button>
-          </div>
-        </div>
+        <Button
+          variant="ghost"
+          className="mb-6"
+          onClick={() => navigate("/employees/directory")}
+        >
+          <ChevronLeft className="mr-2 h-4 w-4" />
+          Back to Employee Overview
+        </Button>
 
         <div className="grid gap-6">
           <Card className="p-6">
-            <h2 className="text-lg font-medium mb-4">Personal Information</h2>
-            <div className="grid gap-4 md:grid-cols-2">
+            <h2 className="text-lg font-medium mb-4">Employment Details</h2>
+            <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" placeholder="Enter first name" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" placeholder="Enter last name" />
+                <Label htmlFor="department">Department</Label>
+                <Input id="department" placeholder="N/A" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="N/A" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="workAddress">Work address</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter email address"
+                  id="workAddress"
+                  placeholder="525 20th St, San Francisco, CA, 94107"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" placeholder="Enter phone number" />
+                <Label htmlFor="startDate">Start date</Label>
+                <Input id="startDate" type="date" placeholder="mm/dd/yyyy" />
               </div>
             </div>
           </Card>
 
           <Card className="p-6">
-            <h2 className="text-lg font-medium mb-4">Employment Details</h2>
-            <div className="grid gap-4 md:grid-cols-2">
+            <h2 className="text-lg font-medium mb-4">Compensation details</h2>
+            <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startDate">Start Date</Label>
-                <Input id="startDate" type="date" />
+                <Label htmlFor="jobTitle">Job title</Label>
+                <Input id="jobTitle" placeholder="N/A" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="department">Department</Label>
-                <Input id="department" placeholder="Enter department" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="position">Position</Label>
-                <Input id="position" placeholder="Enter position" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="employeeType">Employee Type</Label>
-                <Input id="employeeType" placeholder="Enter employee type" />
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-6">
-            <h2 className="text-lg font-medium mb-4">Compensation</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="salary">Annual Salary</Label>
-                <Input id="salary" placeholder="Enter annual salary" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="payType">Pay Type</Label>
-                <Input id="payType" placeholder="Enter pay type" />
+                <Label htmlFor="employeeClassification">
+                  Employee classification
+                </Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select classification" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fullTime">Full-time</SelectItem>
+                    <SelectItem value="partTime">Part-time</SelectItem>
+                    <SelectItem value="contractor">Contractor</SelectItem>
+                    <SelectItem value="intern">Intern</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </Card>

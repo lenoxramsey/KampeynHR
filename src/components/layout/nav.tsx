@@ -26,23 +26,17 @@ export const navigationConfig: NavSection[] = [
     items: [
       {
         title: "Employees",
-        href: "/employees",
+        href: "#",
         subItems: [
           {
             title: "Add New Employee",
             href: "/employees/new",
+            icon: "UserPlus",
           },
           {
             title: "View All Employees",
-            href: "/employees",
-          },
-          {
-            title: "Employee Directory",
             href: "/employees/directory",
-          },
-          {
-            title: "Time Off Requests",
-            href: "/employees/time-off",
+            icon: "Users",
           },
         ],
       },

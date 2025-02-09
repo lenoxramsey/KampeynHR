@@ -1,7 +1,7 @@
 import React from "react";
-import { Settings, User, HelpCircle } from "lucide-react";
+import { Settings, User, HelpCircle, UserPlus, Users } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { navigationConfig } from "./nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -26,6 +26,9 @@ const Header = ({
   userEmail = "john@example.com",
   avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
 }: HeaderProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-4 justify-between">
@@ -34,39 +37,53 @@ const Header = ({
         <div className="flex items-center gap-6">
           {navigationConfig.map((section) =>
             section.items.map((item) => (
-              <div key={item.title} className="relative group">
-                <NavLink
-                  to={item.href}
-                  className={({ isActive }) =>
-                    cn(
-                      "text-base transition-colors hover:text-foreground flex items-center gap-1",
-                      isActive
-                        ? "text-foreground font-medium"
-                        : "text-muted-foreground",
-                    )
-                  }
-                >
-                  {item.title}
-                </NavLink>
-                {item.subItems && (
-                  <div className="invisible group-hover:visible absolute left-0 top-full mt-1 bg-popover rounded-md py-2 w-48 shadow-lg z-50">
-                    {item.subItems.map((subItem) => (
-                      <NavLink
-                        key={subItem.title}
-                        to={subItem.href}
-                        className={({ isActive }) =>
-                          cn(
-                            "block w-full text-left px-4 py-2 text-sm hover:bg-muted",
-                            isActive
-                              ? "text-foreground font-medium bg-muted"
-                              : "text-muted-foreground",
-                          )
-                        }
+              <div key={item.title} className="relative">
+                {item.subItems ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        className={cn(
+                          "text-base transition-colors hover:text-foreground",
+                          location.pathname.startsWith("/employees")
+                            ? "text-foreground font-medium"
+                            : "text-muted-foreground",
+                        )}
                       >
-                        {subItem.title}
-                      </NavLink>
-                    ))}
-                  </div>
+                        {item.title}
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-56">
+                      {item.subItems.map((subItem) => (
+                        <DropdownMenuItem
+                          key={subItem.title}
+                          onClick={() => navigate(subItem.href)}
+                          className="flex items-center"
+                        >
+                          {subItem.icon === "UserPlus" && (
+                            <UserPlus className="mr-2 h-4 w-4" />
+                          )}
+                          {subItem.icon === "Users" && (
+                            <Users className="mr-2 h-4 w-4" />
+                          )}
+                          {subItem.title}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      cn(
+                        "text-base transition-colors hover:text-foreground",
+                        isActive
+                          ? "text-foreground font-medium"
+                          : "text-muted-foreground",
+                      )
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
                 )}
               </div>
             )),
