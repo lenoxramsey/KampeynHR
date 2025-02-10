@@ -13,7 +13,7 @@ export const navigationConfig: NavSection[] = [
     items: [
       {
         title: "Dashboard",
-        href: "/",
+        href: "/dashboard",
       },
     ],
   },
