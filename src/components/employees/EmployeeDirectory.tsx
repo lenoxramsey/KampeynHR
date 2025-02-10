@@ -18,10 +18,14 @@ interface EmployeeDirectoryProps {
   employees?: Employee[];
 }
 
+import { usePageTitle } from "@/utils/usePageTitle";
+
 export default function EmployeeDirectory({
   employees = [],
 }: EmployeeDirectoryProps) {
   const navigate = useNavigate();
+
+  usePageTitle("Employees");
 
   return (
     <div className="min-h-screen bg-background">

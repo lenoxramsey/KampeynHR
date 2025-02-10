@@ -25,6 +25,8 @@ interface HomeProps {
   showOnboarding?: boolean;
 }
 
+import { usePageTitle } from "@/utils/usePageTitle";
+
 export default function Home({
   userName = "John Doe",
   userEmail = "john@example.com",
@@ -44,6 +46,8 @@ export default function Home({
   ],
   showOnboarding = false,
 }: HomeProps) {
+  usePageTitle("Dashboard");
+
   return (
     <div className="min-h-screen bg-background">
       <div className="flex h-screen">

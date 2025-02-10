@@ -31,6 +31,8 @@ interface EmployeeEditorProps {
   isEditing?: boolean;
 }
 
+import { usePageTitle } from "@/utils/usePageTitle";
+
 export default function EmployeeEditor({
   onSave = () => {},
   initialData = {},
@@ -46,6 +48,8 @@ export default function EmployeeEditor({
     { id: "benefits", label: "Benefits" },
     { id: "terminate", label: "Terminate" },
   ];
+
+  usePageTitle("Edit Employee");
 
   return (
     <div className="min-h-screen bg-background">
