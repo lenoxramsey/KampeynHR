@@ -1,7 +1,7 @@
 import React from "react";
-import { Settings, User, HelpCircle, UserPlus, Users } from "lucide-react";
+import { Settings, User, HelpCircle } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { navigationConfig } from "./nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,6 @@ const Header = ({
   userEmail = "john@example.com",
   avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
 }: HeaderProps) => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   return (
@@ -37,55 +36,20 @@ const Header = ({
         <div className="flex items-center gap-6">
           {navigationConfig.map((section) =>
             section.items.map((item) => (
-              <div key={item.title} className="relative">
-                {item.subItems ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button
-                        className={cn(
-                          "text-base transition-colors hover:text-foreground",
-                          location.pathname.startsWith("/employees")
-                            ? "text-foreground font-medium"
-                            : "text-muted-foreground",
-                        )}
-                      >
-                        {item.title}
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-56">
-                      {item.subItems.map((subItem) => (
-                        <DropdownMenuItem
-                          key={subItem.title}
-                          onClick={() => navigate(subItem.href)}
-                          className="flex items-center"
-                        >
-                          {subItem.icon === "UserPlus" && (
-                            <UserPlus className="mr-2 h-4 w-4" />
-                          )}
-                          {subItem.icon === "Users" && (
-                            <Users className="mr-2 h-4 w-4" />
-                          )}
-                          {subItem.title}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <NavLink
-                    to={item.href}
-                    className={({ isActive }) =>
-                      cn(
-                        "text-base transition-colors hover:text-foreground",
-                        isActive
-                          ? "text-foreground font-medium"
-                          : "text-muted-foreground",
-                      )
-                    }
-                  >
-                    {item.title}
-                  </NavLink>
-                )}
-              </div>
+              <NavLink
+                key={item.title}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    "text-base transition-colors hover:text-foreground",
+                    isActive
+                      ? "text-foreground font-medium"
+                      : "text-muted-foreground",
+                  )
+                }
+              >
+                {item.title}
+              </NavLink>
             )),
           )}
 

@@ -1,10 +1,6 @@
 export interface NavItem {
   title: string;
   href: string;
-  subItems?: Array<{
-    title: string;
-    href: string;
-  }>;
 }
 
 export interface NavSection {
@@ -26,19 +22,7 @@ export const navigationConfig: NavSection[] = [
     items: [
       {
         title: "Employees",
-        href: "#",
-        subItems: [
-          {
-            title: "Add New Employee",
-            href: "/employees/new",
-            icon: "UserPlus",
-          },
-          {
-            title: "View All Employees",
-            href: "/employees",
-            icon: "Users",
-          },
-        ],
+        href: "/employees",
       },
       {
         title: "Payroll",
