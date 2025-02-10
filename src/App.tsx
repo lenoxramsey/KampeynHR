@@ -1,8 +1,12 @@
 import React, { Suspense } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
+import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import { LoadingSpinner } from "./components/ui/loading-spinner";
 import routes from "tempo-routes";
 
+const Landing = React.lazy(() => import("./pages/Landing"));
+const SignIn = React.lazy(() => import("./pages/auth/SignIn"));
+const SignUp = React.lazy(() => import("./pages/auth/SignUp"));
+const ForgotPassword = React.lazy(() => import("./pages/auth/ForgotPassword"));
 const Home = React.lazy(() => import("./components/home"));
 const EmployeeEditor = React.lazy(
   () => import("./components/employees/EmployeeEditor"),
@@ -19,7 +23,11 @@ function App() {
       <Suspense fallback={<LoadingSpinner />}>
         <>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/auth/sign-in" element={<SignIn />} />
+            <Route path="/auth/sign-up" element={<SignUp />} />
+            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<Home />} />
             <Route path="/employees" element={<EmployeeDirectory />} />
             <Route path="/employees/new" element={<EmployeeEditor />} />
           </Routes>
