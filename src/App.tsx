@@ -16,24 +16,52 @@ const EmployeeDirectory = React.lazy(
 );
 
 import { ThemeProvider } from "./components/theme-provider";
+import { AuthProvider } from "./lib/auth.tsx";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
-      <Suspense fallback={<LoadingSpinner />}>
-        <>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth/sign-in" element={<SignIn />} />
-            <Route path="/auth/sign-up" element={<SignUp />} />
-            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-            <Route path="/dashboard" element={<Home />} />
-            <Route path="/employees" element={<EmployeeDirectory />} />
-            <Route path="/employees/new" element={<EmployeeEditor />} />
-          </Routes>
-          {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-        </>
-      </Suspense>
+      <AuthProvider>
+        <Suspense fallback={<LoadingSpinner />}>
+          <>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/auth/sign-in" element={<SignIn />} />
+              <Route path="/auth/sign-up" element={<SignUp />} />
+              <Route
+                path="/auth/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/employees"
+                element={
+                  <ProtectedRoute>
+                    <EmployeeDirectory />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/employees/new"
+                element={
+                  <ProtectedRoute>
+                    <EmployeeEditor />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+          </>
+        </Suspense>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

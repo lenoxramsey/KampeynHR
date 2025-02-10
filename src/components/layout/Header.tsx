@@ -1,5 +1,6 @@
 import React from "react";
 import { Settings, User, HelpCircle } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavLink, useLocation } from "react-router-dom";
 import { navigationConfig } from "./nav";
@@ -93,7 +94,9 @@ const Header = ({
                   <span>Help & Support</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Log out</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => supabase.auth.signOut()}>
+                  Log out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

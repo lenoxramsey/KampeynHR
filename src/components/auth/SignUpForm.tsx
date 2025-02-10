@@ -46,17 +46,23 @@ export default function SignUpForm() {
       const { error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
+        options: {
+          data: {
+            first_name: "",
+            last_name: "",
+          },
+        },
       });
 
       if (error) {
         throw error;
       }
 
-      navigate("/auth/verify-email");
-    } catch (error) {
+      // Navigation is handled by the AuthProvider
+    } catch (error: any) {
       console.error("Error:", error);
       form.setError("root", {
-        message: "Something went wrong. Please try again.",
+        message: error.message || "Something went wrong. Please try again.",
       });
     } finally {
       setIsLoading(false);

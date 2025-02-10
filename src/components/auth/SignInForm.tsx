@@ -45,11 +45,11 @@ export default function SignInForm() {
         throw error;
       }
 
-      navigate("/");
-    } catch (error) {
+      // Navigation is handled by the AuthProvider
+    } catch (error: any) {
       console.error("Error:", error);
       form.setError("root", {
-        message: "Invalid email or password",
+        message: error.message || "Invalid email or password",
       });
     } finally {
       setIsLoading(false);
