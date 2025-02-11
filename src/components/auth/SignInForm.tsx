@@ -24,6 +24,7 @@ const formSchema = z.object({
 export default function SignInForm() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,6 +49,7 @@ export default function SignInForm() {
       navigate("/dashboard", { replace: true });
     } catch (error: any) {
       console.error("Error:", error);
+      setAuthError(error.message || "Invalid email or password");
       form.setError("root", {
         message: error.message || "Invalid email or password",
       });
@@ -59,6 +61,11 @@ export default function SignInForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {authError && (
+          <div className="p-3 text-sm text-red-500 bg-red-50 border border-red-200 rounded">
+            {authError}
+          </div>
+        )}
         <FormField
           control={form.control}
           name="email"

@@ -15,10 +15,18 @@ export const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect to dashboard if user is already authenticated and trying to access auth pages
+    if (user && location.pathname.startsWith("/auth/")) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [user, location, navigate]);
 
   useEffect(() => {
     // Check active sessions and sets the user

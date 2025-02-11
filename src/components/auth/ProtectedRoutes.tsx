@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
@@ -16,9 +16,11 @@ export default function ProtectedRoutes() {
     <ProtectedRoute>
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Home />} />
-          <Route path="employees" element={<EmployeeDirectory />} />
-          <Route path="employees/new" element={<EmployeeEditor />} />
+          <Route path="/employees" element={<EmployeeDirectory />} />
+          <Route path="/employees/new" element={<EmployeeEditor />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Suspense>
     </ProtectedRoute>
