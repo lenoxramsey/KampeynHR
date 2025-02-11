@@ -17,16 +17,33 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
       <AuthProvider>
-        <Suspense fallback={<LoadingSpinner />}>
-          <>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/auth/*" element={<AuthRoutes />} />
-              <Route path="/*" element={<ProtectedRoutes />} />
-            </Routes>
-            {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-          </>
-        </Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <Landing />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/auth/*"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <AuthRoutes />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <ProtectedRoutes />
+              </Suspense>
+            }
+          />
+        </Routes>
+        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </AuthProvider>
     </ThemeProvider>
   );
