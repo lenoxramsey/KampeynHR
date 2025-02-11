@@ -43,10 +43,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
 
       if (event === "SIGNED_IN") {
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       }
       if (event === "SIGNED_OUT") {
-        navigate("/");
+        navigate("/", { replace: true });
       }
     });
 
