@@ -16,7 +16,7 @@ export default function ProtectedRoutes() {
     <ProtectedRoute>
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
-          <Route path="dashboard" element={<Home />} />
+          <Route path="/dashboard" element={<Home />} />
           <Route path="employees" element={<EmployeeDirectory />} />
           <Route path="employees/new" element={<EmployeeEditor />} />
         </Routes>

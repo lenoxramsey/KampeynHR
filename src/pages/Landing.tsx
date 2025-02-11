@@ -12,12 +12,18 @@ export default function Landing() {
         <Link to="/" className="flex items-center justify-center">
           <span className="font-bold text-2xl">Kampeyn</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
           <Link
             to="/auth/sign-in"
             className="text-sm font-medium hover:underline underline-offset-4"
           >
             Sign In
+          </Link>
+          <Link
+            to="/auth/sign-up"
+            className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90"
+          >
+            Get Started
           </Link>
         </nav>
       </header>

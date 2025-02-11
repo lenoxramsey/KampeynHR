@@ -45,7 +45,7 @@ export default function SignInForm() {
         throw error;
       }
 
-      // Navigation is handled by the AuthProvider
+      navigate("/dashboard", { replace: true });
     } catch (error: any) {
       console.error("Error:", error);
       form.setError("root", {

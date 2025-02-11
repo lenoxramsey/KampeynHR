@@ -42,7 +42,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       setIsLoading(false);
 
-      if (event === "SIGNED_IN") {
+      if (
+        event === "SIGNED_IN" &&
+        !window.location.pathname.includes("/dashboard")
+      ) {
         navigate("/dashboard", { replace: true });
       }
       if (event === "SIGNED_OUT") {
