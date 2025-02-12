@@ -5,9 +5,10 @@ import SignIn from "@/pages/auth/SignIn";
 import SignUp from "@/pages/auth/SignUp";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
 import VerifyEmail from "@/pages/auth/VerifyEmail";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 export default function AuthRoutes() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,14 @@ export default function AuthRoutes() {
       navigate("/dashboard", { replace: true });
     }
   }, [user, navigate]);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <Routes>

@@ -1,6 +1,5 @@
-import React, { Suspense } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
-import { LoadingSpinner } from "./components/ui/loading-spinner";
+import React from "react";
+import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import routes from "tempo-routes";
 
 const Landing = React.lazy(() => import("./pages/Landing"));
@@ -11,7 +10,6 @@ const ProtectedRoutes = React.lazy(
 
 import { ThemeProvider } from "./components/theme-provider";
 import { AuthProvider } from "./lib/auth.tsx";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   // Handle Tempo routes first
@@ -22,32 +20,13 @@ function App() {
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
       <AuthProvider>
         {tempoRouting}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <Landing />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/auth/*"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <AuthRoutes />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/*"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <ProtectedRoutes />
-              </Suspense>
-            }
-          />
-        </Routes>
+        <React.Suspense>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="auth/*" element={<AuthRoutes />} />
+            <Route path="/*" element={<ProtectedRoutes />} />
+          </Routes>
+        </React.Suspense>
       </AuthProvider>
     </ThemeProvider>
   );
