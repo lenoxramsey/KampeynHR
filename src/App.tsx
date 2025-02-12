@@ -12,19 +12,23 @@ import { ThemeProvider } from "./components/theme-provider";
 import { AuthProvider } from "./lib/auth.tsx";
 
 function App() {
-  // Handle Tempo routes first
-  const tempoRouting =
-    import.meta.env.VITE_TEMPO === "true" ? useRoutes(routes) : null;
-
   return (
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
       <AuthProvider>
-        {tempoRouting}
-        <React.Suspense>
+        {/* Add Tempo routes if in Tempo environment */}
+        {import.meta.env.VITE_TEMPO === "true" && (
+          <Routes>
+            <Route path="/tempobook/*" />
+          </Routes>
+        )}
+
+        {/* Main app routes */}
+        <React.Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="auth/*" element={<AuthRoutes />} />
-            <Route path="/*" element={<ProtectedRoutes />} />
+            <Route path="/auth/*" element={<AuthRoutes />} />
+            <Route path="/dashboard/*" element={<ProtectedRoutes />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </React.Suspense>
       </AuthProvider>

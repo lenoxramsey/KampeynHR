@@ -8,8 +8,7 @@ export default function ProtectedRoutes() {
   return (
     <ProtectedRoute>
       <Routes>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="employees" element={<EmployeeDirectory />} />
         <Route path="employees/new" element={<EmployeeEditor />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

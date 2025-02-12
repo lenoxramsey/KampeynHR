@@ -27,11 +27,12 @@ export default function AuthRoutes() {
 
   return (
     <Routes>
+      <Route index element={<Navigate to="sign-in" replace />} />
       <Route path="sign-in" element={<SignIn />} />
       <Route path="sign-up" element={<SignUp />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
       <Route path="verify-email" element={<VerifyEmail />} />
-      <Route path="*" element={<Navigate to="/auth/sign-in" replace />} />
+      <Route path="*" element={<Navigate to="sign-in" replace />} />
     </Routes>
   );
 }
