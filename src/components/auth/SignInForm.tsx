@@ -45,8 +45,7 @@ export default function SignInForm() {
       if (error) {
         throw error;
       }
-
-      navigate("/dashboard", { replace: true });
+      // Navigation will be handled by AuthProvider
     } catch (error: any) {
       console.error("Error:", error);
       setAuthError(error.message || "Invalid email or password");

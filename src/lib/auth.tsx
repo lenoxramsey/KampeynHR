@@ -27,40 +27,52 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, location, navigate]);
 
   useEffect(() => {
-    // Check active sessions and sets the user
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchProfile(session.user.id);
+    async function initAuth() {
+      try {
+        // Check active sessions and sets the user
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          await fetchProfile(session.user.id);
+          if (!location.pathname.includes("/dashboard")) {
+            navigate("/dashboard", { replace: true });
+          }
+        }
+      } catch (error) {
+        console.error("Error initializing auth:", error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
-    });
+    }
 
-    // Listen for changes on auth state (signed in, signed out, etc.)
+    initAuth();
+
+    // Listen for changes on auth state
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
+
       if (session?.user) {
         await fetchProfile(session.user.id);
+        if (
+          event === "SIGNED_IN" &&
+          !location.pathname.includes("/dashboard")
+        ) {
+          navigate("/dashboard", { replace: true });
+        }
       } else {
         setProfile(null);
-      }
-      setIsLoading(false);
-
-      if (
-        event === "SIGNED_IN" &&
-        !window.location.pathname.includes("/dashboard")
-      ) {
-        navigate("/dashboard", { replace: true });
-      }
-      if (event === "SIGNED_OUT") {
-        navigate("/", { replace: true });
+        if (event === "SIGNED_OUT") {
+          navigate("/", { replace: true });
+        }
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, location]);
 
   async function fetchProfile(userId: string) {
     try {

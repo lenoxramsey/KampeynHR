@@ -14,15 +14,34 @@ const EmployeeEditor = React.lazy(
 export default function ProtectedRoutes() {
   return (
     <ProtectedRoute>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<Home />} />
-          <Route path="employees" element={<EmployeeDirectory />} />
-          <Route path="employees/new" element={<EmployeeEditor />} />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route index element={<Navigate to="/dashboard" replace />} />
+        <Route
+          path="dashboard"
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="employees"
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <EmployeeDirectory />
+            </Suspense>
+          }
+        />
+        <Route
+          path="employees/new"
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <EmployeeEditor />
+            </Suspense>
+          }
+        />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
     </ProtectedRoute>
   );
 }
