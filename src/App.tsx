@@ -14,9 +14,14 @@ import { AuthProvider } from "./lib/auth.tsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  // Handle Tempo routes first
+  const tempoRouting =
+    import.meta.env.VITE_TEMPO === "true" ? useRoutes(routes) : null;
+
   return (
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
       <AuthProvider>
+        {tempoRouting}
         <Routes>
           <Route
             path="/"
@@ -43,7 +48,6 @@ function App() {
             }
           />
         </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </AuthProvider>
     </ThemeProvider>
   );

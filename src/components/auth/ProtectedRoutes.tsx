@@ -16,10 +16,10 @@ export default function ProtectedRoutes() {
     <ProtectedRoute>
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/employees" element={<EmployeeDirectory />} />
-          <Route path="/employees/new" element={<EmployeeEditor />} />
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Home />} />
+          <Route path="employees" element={<EmployeeDirectory />} />
+          <Route path="employees/new" element={<EmployeeEditor />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Suspense>
