@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import SignIn from "@/pages/auth/SignIn";
 import SignUp from "@/pages/auth/SignUp";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
+import VerifyEmail from "@/pages/auth/VerifyEmail";
 
 export default function AuthRoutes() {
   const { user } = useAuth();
