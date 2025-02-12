@@ -13,7 +13,7 @@ export default function ForgotPassword() {
       footer={
         <div className="text-center text-sm">
           Remember your password?{" "}
-          <Link to="/auth/sign-in" className="font-medium hover:underline">
+          <Link to="/sign-in" className="font-medium hover:underline">
             Sign in
           </Link>
         </div>

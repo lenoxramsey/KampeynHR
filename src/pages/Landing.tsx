@@ -14,13 +14,13 @@ export default function Landing() {
         </Link>
         <nav className="ml-auto flex items-center gap-4 sm:gap-6">
           <Link
-            to="/auth/sign-in"
+            to="/sign-in"
             className="text-sm font-medium hover:underline underline-offset-4"
           >
             Sign In
           </Link>
           <Link
-            to="/auth/sign-up"
+            to="/sign-up"
             className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90"
           >
             Get Started
@@ -43,10 +43,10 @@ export default function Landing() {
                 </p>
               </div>
               <div className="space-x-4">
-                <Link to="/auth/sign-up">
+                <Link to="/sign-up">
                   <Button size="lg">Get Started</Button>
                 </Link>
-                <Link to="/auth/sign-in">
+                <Link to="/sign-in">
                   <Button variant="outline" size="lg">
                     Sign In
                   </Button>

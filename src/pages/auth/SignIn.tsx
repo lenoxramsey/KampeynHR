@@ -13,14 +13,14 @@ export default function SignIn() {
       footer={
         <div className="text-center text-sm">
           <Link
-            to="/auth/forgot-password"
+            to="/forgot-password"
             className="text-muted-foreground hover:text-primary"
           >
             Forgot your password?
           </Link>
           <div className="mt-2">
             Don't have an account?{" "}
-            <Link to="/auth/sign-up" className="font-medium hover:underline">
+            <Link to="/sign-up" className="font-medium hover:underline">
               Sign up
             </Link>
           </div>

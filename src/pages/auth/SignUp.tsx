@@ -13,7 +13,7 @@ export default function SignUp() {
       footer={
         <div className="text-center text-sm">
           Already have an account?{" "}
-          <Link to="/auth/sign-in" className="font-medium hover:underline">
+          <Link to="/sign-in" className="font-medium hover:underline">
             Sign in
           </Link>
         </div>
